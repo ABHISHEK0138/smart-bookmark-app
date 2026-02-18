@@ -1,4 +1,4 @@
-import Image from "next/image";
+/*import Image from "next/image";
 
 export default function Home() {
   return (
@@ -62,4 +62,82 @@ export default function Home() {
       </main>
     </div>
   );
+}
+*/
+
+"use client";
+
+import { supabase } from "@/lib/supabase";
+
+export default function Home() {
+
+  const login = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${location.origin}/dashboard`,
+      },
+    });
+  };
+
+  /*return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-xl shadow-lg text-center">
+        <h1 className="text-2xl text-black font-bold mb-6">Smart Bookmark App</h1>
+
+        <button
+          onClick={login}
+          className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800"
+        >
+          Sign in with Google
+        </button>
+      </div>
+    </div>
+  );*/
+
+  return (
+  <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 flex items-center justify-center px-4">
+
+    <div className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl rounded-3xl p-10 w-full max-w-md text-center text-white">
+
+      <div className="mb-6">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/20 flex items-center justify-center text-3xl">
+          🔖
+        </div>
+
+        <h1 className="text-3xl font-bold">
+          Smart Bookmark
+        </h1>
+
+        <p className="text-white/80 mt-2 text-sm">
+          Save, organize and access your favorite links instantly.
+        </p>
+      </div>
+
+      <button
+        onClick={login}
+        className="w-full flex items-center justify-center gap-3 bg-white text-gray-900 font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          className="w-5 h-5"
+        >
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.61l6.85-6.85C35.91 2.36 30.36 0 24 0 14.82 0 6.73 5.64 2.69 13.74l7.98 6.2C12.77 13.72 17.95 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.5 24.5c0-1.63-.15-3.2-.43-4.71H24v9.02h12.7c-.55 2.96-2.2 5.47-4.68 7.17l7.28 5.67C43.95 37.18 46.5 31.42 46.5 24.5z"/>
+          <path fill="#FBBC05" d="M10.67 28.95c-.48-1.42-.75-2.94-.75-4.45s.27-3.03.75-4.45l-7.98-6.2C1.64 16.78 1 20.32 1 24.5s.64 7.72 1.69 10.65l7.98-6.2z"/>
+          <path fill="#34A853" d="M24 49c6.36 0 11.91-2.09 15.88-5.7l-7.28-5.67c-2.02 1.35-4.6 2.14-8.6 2.14-6.05 0-11.23-4.22-13.33-9.94l-7.98 6.2C6.73 43.36 14.82 49 24 49z"/>
+        </svg>
+
+        Continue with Google
+      </button>
+
+      <p className="text-xs text-white/60 mt-6">
+        Secure authentication powered by Supabase
+      </p>
+
+    </div>
+  </div>
+);
+
 }
